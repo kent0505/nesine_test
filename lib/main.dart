@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
     precacheImage(const AssetImage('assets/bg1.png'), context);
     precacheImage(const AssetImage('assets/bg2.png'), context);
     precacheImage(const AssetImage('assets/bg3.png'), context);
+    precacheImage(const AssetImage('assets/bg4.png'), context);
 
     return MultiBlocProvider(
       providers: [

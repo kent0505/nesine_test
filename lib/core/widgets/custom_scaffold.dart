@@ -8,11 +8,13 @@ class CustomScaffold extends StatelessWidget {
     required this.body,
     this.color = AppColors.black,
     this.bg = 0,
+    this.started = false,
   });
 
   final Widget body;
   final Color color;
   final int bg;
+  final bool started;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,25 @@ class CustomScaffold extends StatelessWidget {
                         ],
                       ),
                     ),
+                  ),
+                if (started)
+                  Stack(
+                    children: [
+                      ColorFiltered(
+                        colorFilter: const ColorFilter.mode(
+                          Colors.black,
+                          BlendMode.color,
+                        ),
+                        child: Image.asset(
+                          'assets/puzzle/p$bg.png',
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Container(
+                        color: Colors.black.withOpacity(0.7),
+                      )
+                    ],
                   ),
                 // content
                 body,
