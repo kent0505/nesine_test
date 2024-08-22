@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../features/home/bloc/home_bloc.dart';
 
 bool onboard = true;
+double navBarHeight = 90;
 
 Future<void> getData() async {
   final prefs = await SharedPreferences.getInstance();

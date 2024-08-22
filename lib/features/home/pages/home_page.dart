@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/utils.dart';
 import '../../../core/widgets/custom_scaffold.dart';
+import '../../match/pages/match_page.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/nav_bar.dart';
 import 'settings_page.dart';
@@ -18,7 +19,7 @@ class HomePage extends StatelessWidget {
           bg: getBG(state),
           body: Stack(
             children: [
-              if (state is HomeInitial) const Text('Matches'),
+              if (state is HomeInitial) const MatchPage(),
               if (state is HomeNews) const Text('News'),
               if (state is HomePuzzle) const Text('Puzzle'),
               if (state is HomeSettings) const SettingsPage(),

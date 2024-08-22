@@ -6,6 +6,9 @@ class AppColors {
   static const Color black = Color(0xff000000);
   static const Color navBarIcon = Color(0xff464646);
   static const Color settingsTile = Color(0xff222222);
+
+  static Color main90 = const Color(0xffFFCC00).withOpacity(0.9);
+  static Color main10 = const Color(0xffFFCC00).withOpacity(0.1);
 }
 
 class Fonts {

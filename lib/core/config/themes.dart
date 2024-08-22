@@ -12,6 +12,6 @@ final theme = ThemeData(
   //   selectionHandleColor: AppColors.white50,
   // ),
   colorScheme: ColorScheme.fromSwatch(
-    accentColor: AppColors.main, // overscroll indicator color
+    accentColor: AppColors.main10, // overscroll indicator color
   ),
 );

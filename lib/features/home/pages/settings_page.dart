@@ -3,60 +3,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/config/app_colors.dart';
-import '../../../core/utils.dart';
+import '../../../core/widgets/title_text.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 33),
-      child: Column(
-        children: [
-          SizedBox(height: 40 + getStatusBar(context)),
-          const _Title(),
-          const SizedBox(height: 68),
-          const _SettingsTile(
-            title: 'Share with friends',
-            id: 1,
-          ),
-          const SizedBox(height: 25),
-          const _SettingsTile(
-            title: 'Subscription info',
-            id: 2,
-          ),
-          const SizedBox(height: 25),
-          const _SettingsTile(
-            title: 'Terms of use',
-            id: 3,
-          ),
-          const SizedBox(height: 25),
-          const _SettingsTile(
-            title: 'Privacy Policy',
-            id: 4,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _Title extends StatelessWidget {
-  const _Title();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
+    return const Column(
       children: [
-        SizedBox(width: 5),
-        Text(
-          'Settings',
-          style: TextStyle(
-            color: AppColors.white,
-            fontSize: 32,
-            fontFamily: Fonts.bold,
-          ),
+        TitleText('Settings'),
+        SizedBox(height: 68),
+        _SettingsTile(
+          title: 'Share with friends',
+          id: 1,
+        ),
+        SizedBox(height: 25),
+        _SettingsTile(
+          title: 'Subscription info',
+          id: 2,
+        ),
+        SizedBox(height: 25),
+        _SettingsTile(
+          title: 'Terms of use',
+          id: 3,
+        ),
+        SizedBox(height: 25),
+        _SettingsTile(
+          title: 'Privacy Policy',
+          id: 4,
         ),
       ],
     );
@@ -76,6 +51,7 @@ class _SettingsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 47,
+      margin: const EdgeInsets.symmetric(horizontal: 33),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: AppColors.settingsTile,

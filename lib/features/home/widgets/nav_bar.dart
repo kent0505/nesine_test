@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/config/app_colors.dart';
+import '../../../core/utils.dart';
 import '../bloc/home_bloc.dart';
 
 class NavBar extends StatelessWidget {
@@ -14,8 +14,8 @@ class NavBar extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        height: 90,
-        color: AppColors.main.withOpacity(0.9),
+        height: navBarHeight,
+        color: AppColors.main90,
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: BlocBuilder<HomeBloc, HomeState>(
@@ -90,13 +90,13 @@ class _NavBarButton extends StatelessWidget {
             const SizedBox(height: 14),
             SvgPicture.asset(
               'assets/$asset.svg',
-              color: active ? Colors.white : AppColors.navBarIcon,
+              color: active ? AppColors.white : AppColors.navBarIcon,
             ),
             const SizedBox(height: 3),
             Text(
               title,
               style: TextStyle(
-                color: active ? Colors.white : AppColors.navBarIcon,
+                color: active ? AppColors.white : AppColors.navBarIcon,
                 fontSize: 10,
                 fontFamily: Fonts.regular,
               ),
