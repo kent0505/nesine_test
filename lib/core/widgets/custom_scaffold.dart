@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../config/app_colors.dart';
+
 class CustomScaffold extends StatelessWidget {
-  const CustomScaffold({super.key, required this.body});
+  const CustomScaffold({
+    super.key,
+    required this.body,
+    this.color = AppColors.black,
+    this.bg = 0,
+  });
 
   final Widget body;
+  final Color color;
+  final int bg;
 
   @override
   Widget build(BuildContext context) {
@@ -11,27 +20,35 @@ class CustomScaffold extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: Column(
         children: [
-          Container(
-            height: MediaQuery.of(context).viewPadding.top,
-            // color: const Color(0xff06334D),
-            color: Colors.white,
-          ),
           Expanded(
             child: Stack(
               children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    // gradient: LinearGradient(
-                    //   begin: Alignment.topCenter,
-                    //   end: Alignment.bottomCenter,
-                    //   colors: [
-                    //     Color(0xff072434),
-                    //     Color(0xff0D0819),
-                    //   ],
-                    // ),
+                // bg color
+                Container(decoration: BoxDecoration(color: color)),
+                // bg image
+                if (bg != 0)
+                  Image.asset(
+                    'assets/bg$bg.png',
+                    height: 210,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
                   ),
-                ),
+                // image gradient
+                if (bg != 0)
+                  Container(
+                    height: 210,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          AppColors.black.withOpacity(0),
+                          AppColors.black,
+                        ],
+                      ),
+                    ),
+                  ),
+                // content
                 body,
               ],
             ),

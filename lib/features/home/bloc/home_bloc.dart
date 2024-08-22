@@ -10,8 +10,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         if (state is HomeInitial) return;
         emit(HomeInitial());
       } else if (event.index == 1) {
-        if (state is HomeActivities) return;
-        emit(HomeActivities());
+        if (state is HomeNews) return;
+        emit(HomeNews());
+      } else if (event.index == 2) {
+        if (state is HomePuzzle) return;
+        emit(HomePuzzle());
       } else {
         if (state is HomeSettings) return;
         emit(HomeSettings());

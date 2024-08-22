@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/utils.dart';
 import '../../../core/widgets/custom_scaffold.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/nav_bar.dart';
@@ -11,39 +12,21 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      body: Stack(
-        children: [
-          BlocBuilder<HomeBloc, HomeState>(
-            builder: (context, state) {
-              if (state is HomeSettings) return const SettingsPage();
-
-              if (state is HomeActivities) return const Text('Actives');
-
-              return const _Home();
-            },
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        return CustomScaffold(
+          bg: getBG(state),
+          body: Stack(
+            children: [
+              if (state is HomeInitial) const Text('Matches'),
+              if (state is HomeNews) const Text('News'),
+              if (state is HomePuzzle) const Text('Puzzle'),
+              if (state is HomeSettings) const SettingsPage(),
+              const NavBar(),
+            ],
           ),
-          const NavBar(),
-        ],
-      ),
-    );
-  }
-}
-
-class _Home extends StatefulWidget {
-  const _Home();
-
-  @override
-  State<_Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<_Home> {
-  @override
-  Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Text('Home'),
-      ],
+        );
+      },
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/config/app_colors.dart';
 import '../../core/utils.dart';
 
 class SplashPage extends StatefulWidget {
@@ -31,7 +32,7 @@ class _SplashPageState extends State<SplashPage>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 1),
       vsync: this,
     )..repeat();
     load();
@@ -46,11 +47,46 @@ class _SplashPageState extends State<SplashPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: RotationTransition(
-          turns: _controller,
-          child: SvgPicture.asset('assets/loading.svg'),
-        ),
+      backgroundColor: AppColors.main,
+      body: Stack(
+        children: [
+          Positioned(
+            top: 0,
+            left: 0,
+            child: SvgPicture.asset('assets/splash1.svg'),
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: SvgPicture.asset('assets/splash2.svg'),
+          ),
+          Positioned(
+            bottom: 127,
+            left: 0,
+            right: 0,
+            child: Column(
+              children: [
+                RotationTransition(
+                  turns: _controller,
+                  child: Transform.scale(
+                    scaleX: -1,
+                    child: SvgPicture.asset('assets/loading.svg'),
+                  ),
+                ),
+                const SizedBox(height: 18),
+                const Text(
+                  'LOADING...',
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontSize: 32,
+                    fontWeight: FontWeight.w800,
+                    fontFamily: Fonts.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
