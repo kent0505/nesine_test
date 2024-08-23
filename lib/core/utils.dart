@@ -1,20 +1,36 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../features/home/bloc/home_bloc.dart';
 
-bool onboard = true;
 double navBarHeight = 90;
+
+bool onboard = true;
+int lastLoadDay = 1;
+String jsonData = '';
 
 Future<void> getData() async {
   final prefs = await SharedPreferences.getInstance();
   // await prefs.remove('onboard');
   onboard = prefs.getBool('onboard') ?? true;
+  lastLoadDay = prefs.getInt('lastLoadDay') ?? 1;
+  jsonData = prefs.getString('jsonData') ?? '';
 }
 
 Future<void> saveData() async {
   final prefs = await SharedPreferences.getInstance();
   prefs.setBool('onboard', false);
+}
+
+Future<void> saveLoad(int day, String json) async {
+  final prefs = await SharedPreferences.getInstance();
+  lastLoadDay = day;
+  jsonData = json;
+  prefs.setInt('lastLoadDay', day);
+  prefs.setString('jsonData', json);
+  log('lastLoadDay = $day');
 }
 
 int getCurrentTimestamp() {

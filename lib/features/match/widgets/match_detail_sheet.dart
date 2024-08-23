@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
 import '../../../core/widgets/buttons/x_button.dart';
-import '../models/match_model.dart';
+import '../../../core/models/match_model.dart';
 import 'club_data.dart';
 import 'league_data.dart';
 

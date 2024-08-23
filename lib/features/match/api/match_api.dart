@@ -2,16 +2,17 @@
 
 // aad567230b15af533a80bf5aa13a14cb
 
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
-import '../models/match_model.dart';
+import '../../../core/models/match_model.dart';
 
 class MatchApi {
   final dio = Dio();
 
-  Future<List<MatchModel>> getMatches(String date) async {
+  Future<Result> getMatches(String date) async {
     try {
       final response = await dio.get(
         'https://v3.football.api-sports.io/fixtures?date=$date',
@@ -26,16 +27,51 @@ class MatchApi {
       log(response.data.toString());
       if (response.statusCode == 200) {
         List<dynamic> data = response.data['response'];
-        List<MatchModel> fixtures = data.map((json) {
+        List<MatchModel> matches = data.map((json) {
           return MatchModel.fromJson(json);
         }).toList();
-        return fixtures;
+        return SuccessResult(
+          matches: matches,
+          jsonData: jsonEncode(response.data),
+        );
       } else {
-        return [];
+        return ErrorResult();
       }
     } catch (e) {
       log(e.toString());
-      return [];
+      return ErrorResult();
+    }
+  }
+
+  Future<Result> getJson(String json) async {
+    try {
+      final jsonData = jsonDecode(json);
+      List data = jsonData['response'];
+      List<MatchModel> matches = data.map((json) {
+        return MatchModel.fromJson(json);
+      }).toList();
+      return JsonResult(matches: matches);
+    } catch (e) {
+      log(e.toString());
+      return ErrorResult();
     }
   }
 }
+
+abstract class Result {}
+
+class SuccessResult extends Result {
+  final List<MatchModel> matches;
+  final String jsonData;
+  SuccessResult({
+    required this.matches,
+    required this.jsonData,
+  });
+}
+
+class JsonResult extends Result {
+  final List<MatchModel> matches;
+  JsonResult({required this.matches});
+}
+
+class ErrorResult extends Result {}

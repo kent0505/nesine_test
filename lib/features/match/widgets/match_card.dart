@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/config/app_colors.dart';
-import '../models/match_model.dart';
+import '../../../core/models/match_model.dart';
 import 'club_data.dart';
 import 'league_data.dart';
 import 'match_detail_sheet.dart';
