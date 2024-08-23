@@ -7,11 +7,13 @@ class PuzzlePiece extends StatelessWidget {
     super.key,
     required this.id,
     required this.puzzleID,
+    required this.started,
     required this.onPressed,
   });
 
   final int id;
   final int puzzleID;
+  final bool started;
   final void Function(int) onPressed;
 
   @override
@@ -19,9 +21,11 @@ class PuzzlePiece extends StatelessWidget {
     final size = MediaQuery.of(context).size.width / 3 - 80 / 3;
 
     return CupertinoButton(
-      onPressed: () {
-        onPressed(puzzleID);
-      },
+      onPressed: started
+          ? () {
+              onPressed(puzzleID);
+            }
+          : null,
       padding: EdgeInsets.zero,
       child: SizedBox(
         height: size,

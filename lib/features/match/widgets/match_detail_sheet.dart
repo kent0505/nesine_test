@@ -12,11 +12,16 @@ class MatchDetailSheet extends StatelessWidget {
       height: MediaQuery.of(context).size.height - 137,
       child: Stack(
         children: [
-          Image.asset(
-            'assets/bg4.png',
-            height: 210,
-            width: double.infinity,
-            fit: BoxFit.cover,
+          ClipRRect(
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(12),
+            ),
+            child: Image.asset(
+              'assets/bg4.png',
+              height: 210,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
           ),
           Container(
             height: 210,

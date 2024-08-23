@@ -6,6 +6,7 @@ import '../../../core/widgets/buttons/arrow_button.dart';
 import '../../../core/widgets/buttons/primary_button.dart';
 import '../../../core/widgets/custom_scaffold.dart';
 import '../widgets/puzzle_piece.dart';
+import '../widgets/win_dialog.dart';
 
 class PuzzleGamePage extends StatefulWidget {
   const PuzzleGamePage({super.key, required this.id});
@@ -19,20 +20,40 @@ class PuzzleGamePage extends StatefulWidget {
 class _PuzzleGamePageState extends State<PuzzleGamePage> {
   List<int> pieces = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  // int? firstSelectedIndex;
+  int? firstSelectedIndex;
 
-  // void swapValues(int firstIndex, int secondIndex) {
-  //   setState(() {
-  //     try {
-  //       int temp = pieces[firstIndex];
-  //       pieces[firstIndex] = pieces[secondIndex];
-  //       pieces[secondIndex] = temp;
-  //       firstSelectedIndex = null;
-  //     } catch (e) {
-  //       log(e.toString());
-  //     }
-  //   });
-  // }
+  void check() {
+    if (pieces[0] == 1 &&
+        pieces[1] == 2 &&
+        pieces[2] == 3 &&
+        pieces[3] == 4 &&
+        pieces[4] == 5 &&
+        pieces[5] == 6 &&
+        pieces[6] == 7 &&
+        pieces[7] == 8 &&
+        pieces[8] == 9) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const WinDialog();
+        },
+      );
+    }
+  }
+
+  void swapValues(int firstIndex, int secondIndex) {
+    setState(() {
+      try {
+        int temp = pieces[firstIndex];
+        pieces[firstIndex] = pieces[secondIndex];
+        pieces[secondIndex] = temp;
+        firstSelectedIndex = null;
+      } catch (e) {
+        print(e.toString());
+      }
+    });
+    check();
+  }
 
   bool started = false;
 
@@ -44,14 +65,13 @@ class _PuzzleGamePageState extends State<PuzzleGamePage> {
   }
 
   void onPuzzle(int id) {
-    // if (firstSelectedIndex == null) {
-    //   firstSelectedIndex = id;
-    // } else {
-    //   if (id == firstSelectedIndex) return;
-    //   swapValues(firstSelectedIndex!, id);
-    // }
-
-    print(id);
+    if (firstSelectedIndex == null) {
+      firstSelectedIndex = pieces.indexOf(id);
+    } else {
+      int secondSelectedIndex = pieces.indexOf(id);
+      if (secondSelectedIndex == firstSelectedIndex) return;
+      swapValues(firstSelectedIndex!, secondSelectedIndex);
+    }
   }
 
   @override
@@ -90,18 +110,21 @@ class _PuzzleGamePageState extends State<PuzzleGamePage> {
                   PuzzlePiece(
                     id: widget.id,
                     puzzleID: pieces[0],
+                    started: started,
                     onPressed: onPuzzle,
                   ),
                   const SizedBox(width: 8),
                   PuzzlePiece(
                     id: widget.id,
                     puzzleID: pieces[1],
+                    started: started,
                     onPressed: onPuzzle,
                   ),
                   const SizedBox(width: 8),
                   PuzzlePiece(
                     id: widget.id,
                     puzzleID: pieces[2],
+                    started: started,
                     onPressed: onPuzzle,
                   ),
                 ],
@@ -113,18 +136,21 @@ class _PuzzleGamePageState extends State<PuzzleGamePage> {
                   PuzzlePiece(
                     id: widget.id,
                     puzzleID: pieces[3],
+                    started: started,
                     onPressed: onPuzzle,
                   ),
                   const SizedBox(width: 8),
                   PuzzlePiece(
                     id: widget.id,
                     puzzleID: pieces[4],
+                    started: started,
                     onPressed: onPuzzle,
                   ),
                   const SizedBox(width: 8),
                   PuzzlePiece(
                     id: widget.id,
                     puzzleID: pieces[5],
+                    started: started,
                     onPressed: onPuzzle,
                   ),
                 ],
@@ -136,18 +162,21 @@ class _PuzzleGamePageState extends State<PuzzleGamePage> {
                   PuzzlePiece(
                     id: widget.id,
                     puzzleID: pieces[6],
+                    started: started,
                     onPressed: onPuzzle,
                   ),
                   const SizedBox(width: 8),
                   PuzzlePiece(
                     id: widget.id,
                     puzzleID: pieces[7],
+                    started: started,
                     onPressed: onPuzzle,
                   ),
                   const SizedBox(width: 8),
                   PuzzlePiece(
                     id: widget.id,
                     puzzleID: pieces[8],
+                    started: started,
                     onPressed: onPuzzle,
                   ),
                 ],
