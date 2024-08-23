@@ -26,6 +26,7 @@ class NewsCard extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: model.image,
               fit: BoxFit.cover,
+              width: double.infinity,
               errorWidget: (context, url, error) {
                 return Container();
               },
