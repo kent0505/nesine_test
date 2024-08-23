@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:football_test/core/utils.dart';
 
 import '../config/app_colors.dart';
+import '../utils.dart';
 
 class TitleText extends StatelessWidget {
   const TitleText(this.title, {super.key});

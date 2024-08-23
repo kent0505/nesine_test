@@ -39,8 +39,8 @@ class MatchCard extends StatelessWidget {
                 image: model.homeTeamLogo,
               ),
               _ScoreData(
-                score1: '${model.homeGoals} - ${model.awayGoals}',
-                score2: '2 - 3',
+                score1: '${model.homeGoals1} - ${model.awayGoals1}',
+                score2: '${model.homeGoals2} - ${model.awayGoals2}',
               ),
               ClubData(
                 title: model.awayTeamTitle,

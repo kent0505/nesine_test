@@ -21,6 +21,20 @@ int getCurrentTimestamp() {
   return DateTime.now().millisecondsSinceEpoch ~/ 1000;
 }
 
+String convertToDate(int timestamp) {
+  DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+  String formattedDate =
+      '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
+  return formattedDate;
+}
+
+String convertToTime(int timestamp) {
+  DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+  String formattedTime =
+      '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+  return formattedTime;
+}
+
 double getStatusBar(BuildContext context) {
   return MediaQuery.of(context).viewPadding.top;
 }

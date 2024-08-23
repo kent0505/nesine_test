@@ -4,20 +4,26 @@ class MatchModel {
     required this.homeTeamLogo,
     required this.awayTeamTitle,
     required this.awayTeamLogo,
-    required this.homeGoals,
-    required this.awayGoals,
+    required this.homeGoals1,
+    required this.homeGoals2,
+    required this.awayGoals1,
+    required this.awayGoals2,
     required this.time,
     required this.league,
+    required this.stadium,
   });
 
   final String homeTeamTitle;
   final String homeTeamLogo;
   final String awayTeamTitle;
   final String awayTeamLogo;
-  final int homeGoals;
-  final int awayGoals;
-  final DateTime time;
+  final int homeGoals1;
+  final int homeGoals2;
+  final int awayGoals1;
+  final int awayGoals2;
+  final int time;
   final String league;
+  final String stadium;
 
   factory MatchModel.fromJson(Map<String, dynamic> json) {
     return MatchModel(
@@ -25,12 +31,13 @@ class MatchModel {
       homeTeamLogo: json['teams']['home']['logo'],
       awayTeamTitle: json['teams']['away']['name'],
       awayTeamLogo: json['teams']['away']['logo'],
-      homeGoals: json['goals']['home'] ?? 0,
-      awayGoals: json['goals']['away'] ?? 0,
-      time: DateTime.fromMillisecondsSinceEpoch(
-        json['fixture']['timestamp'] ?? 0 * 1000,
-      ),
+      homeGoals1: json['score']['halftime']['home'] ?? 0,
+      homeGoals2: json['score']['fulltime']['home'] ?? 0,
+      awayGoals1: json['score']['halftime']['away'] ?? 0,
+      awayGoals2: json['score']['fulltime']['away'] ?? 0,
+      time: json['fixture']['periods']['second'] ?? 0,
       league: json['league']['name'],
+      stadium: json['fixture']['venue']['name'] ?? '',
     );
   }
 }
