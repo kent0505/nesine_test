@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../../core/config/app_colors.dart';
 import '../../../core/widgets/buttons/x_button.dart';
+import '../models/match_model.dart';
+import 'club_data.dart';
+import 'league_data.dart';
 
 class MatchDetailSheet extends StatelessWidget {
-  const MatchDetailSheet({super.key});
+  const MatchDetailSheet({super.key, required this.model});
+
+  final MatchModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +46,7 @@ class MatchDetailSheet extends StatelessWidget {
             top: 0,
             child: XButton(),
           ),
-          const _ClubsCard(),
+          _ClubsCard(model: model),
         ],
       ),
     );
@@ -49,7 +54,9 @@ class MatchDetailSheet extends StatelessWidget {
 }
 
 class _ClubsCard extends StatelessWidget {
-  const _ClubsCard();
+  const _ClubsCard({required this.model});
+
+  final MatchModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +66,47 @@ class _ClubsCard extends StatelessWidget {
       right: 30,
       child: Container(
         height: 128,
+        padding: const EdgeInsets.all(17),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: AppColors.main90,
+        ),
+        child: Column(
+          children: [
+            LeagueData(title: model.league),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClubData(
+                  title: model.homeTeamTitle,
+                  image: model.homeTeamLogo,
+                ),
+                const SizedBox(
+                  width: 70,
+                  child: Center(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 18),
+                        Text(
+                          'VS',
+                          style: TextStyle(
+                            color: AppColors.navBarIcon,
+                            fontSize: 16,
+                            fontFamily: Fonts.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                ClubData(
+                  title: model.awayTeamTitle,
+                  image: model.awayTeamLogo,
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

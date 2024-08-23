@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/config/app_colors.dart';
 import '../../core/utils.dart';
+import '../match/bloc/match_bloc.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -18,6 +20,8 @@ class _SplashPageState extends State<SplashPage>
 
   void load() async {
     await getData().then((value) {
+      context.read<MatchBloc>().add(GetMatchesEvent());
+
       Future.delayed(const Duration(seconds: 2), () {
         if (onboard) {
           context.go('/onboard');
